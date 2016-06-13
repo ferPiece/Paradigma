@@ -167,6 +167,9 @@ class Contacto:
     def get_correo_electronico (self):
         return self.__correo_electronico
 
+    def __str__(self):
+        return "Contacto['%s', '%s']" % (self.get_numero_telefonico(), self.get_correo_electronico())
+
 
 class Reservable:
     """Clase que define algo reservable, de forma que se guarde los datos"""
@@ -198,8 +201,8 @@ class Laboratorio(Reservable, Consultable,persistent.Persistent):
         self.__nombre = nombre
         self.__cantidad_maquinas = cantidad_maquinas
 
-        #le agrege esto ya que un laboratorio puede ser prestado varias veces pero en diferentes horarios.
-        self.__fichas = [] #la fichas contiene el horario y fecha del prestamo de un laboratorio - 
+        #le agregue esto ya que un laboratorio puede ser prestado varias veces pero en diferentes horarios.
+        self.__fichas = [] #la ficha contiene el horario y fecha del prestamo de un laboratorio - 
 
     #implementar las funciones abstractas
     def reserva(self, ficha):
@@ -212,9 +215,14 @@ class Laboratorio(Reservable, Consultable,persistent.Persistent):
         entonces estoy pensando como hacerlo en mis ratos libres - si ya tenes clara esa parte me avisas!!
 
         """
+        
+
+        pass
 
     def consultar(self):
         #implementar la consulta de un laboratorio - no se como queres consultar millon forma hay
+
+        pass
 
     #Pemite agregar una ficha - equivalente a un prestamo
     def agregar_ficha(self, ficha):
@@ -250,10 +258,14 @@ class Laboratorio(Reservable, Consultable,persistent.Persistent):
 
 class Ficha:
     """Clase que contiene los datos basico para un prestamo tales como la hora y fecha"""
-    def __init__ (self, hora_inicio, hora_fin, fecha):
+    def __init__ (self, codigo, hora_inicio, hora_fin, fecha):
+        self.__codigo = codigo
         self.__hora_inicio = hora_inicio
         self.__hora_fin = hora_fin
         self.__fecha = fecha
+
+    def set_codigo (self, codigo):
+        self.__codigo = codigo 
 
     def set_hora_inicio(self, hora_inicio):
         self.__hora_inicio = hora_inicio
@@ -264,17 +276,20 @@ class Ficha:
     def set_hora_fin(self, hora_fin):
         self.__hora_fin = hora_fin
 
-    def get_hora_fin(self, hora_fin):
+    def get_codigo (self):
+        return self.__codigo
+
+    def get_hora_fin(self):
         return self.__hora_fin
 
     def set_fecha (self, fecha):
         self.__fecha = fecha
 
-    def get_fecha(self, fecha):
+    def get_fecha(self):
         return self.__fecha
 
     def __str__(self):
-        return "Ficha['%s', '%s', '%s']"%(self.get_hora_inicio(), self.get_hora_fin(),self.get_fecha())
+        return "Ficha['%s', %s', '%s', '%s']"% (self.get_codigo(), self.get_hora_inicio(), self.get_hora_fin(),self.get_fecha())
 
 
 

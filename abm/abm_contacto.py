@@ -20,7 +20,7 @@ class ModuloContacto(Modulo):
     def listar(self):
         contactos = self.get_controlador().get_lista_objetos()
         print(msg('abm.contacto.titulo.lista'))
-        for cont in contacto:
+        for cont in contactos:
             print(cont.__str__())        
         self.pausa()
 

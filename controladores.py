@@ -219,10 +219,10 @@ class ControladorContacto(ControladorAncestro):
         return contacto.get_numero_telefonico()
     
     def validar_objeto(self, contacto):
-        if not contacto.get_numero_telefonico() or len(contacto.get_numero_telefonico().strip()) == 0:
-            raise Exception("Debe cargar el numero telefonico del empleado!")
         if not contacto.get_numero_telefonico().isdigit():
             raise Exception("El numero telefonico debe ser numerico")
+        if not contacto.get_numero_telefonico() or len(contacto.get_numero_telefonico().strip()) == 0:
+            raise Exception("Debe cargar el numero telefonico del empleado!")
         if not contacto.get_correo_electronico():
             raise Exception("Debe ingresar un correo electronico para el empleado!")
        
@@ -235,7 +235,7 @@ class ControladorContacto(ControladorAncestro):
             raise Exception("No existe un empleado con el numero telefonico {}".format(contacto.get_numero_telefonico()))
 
     def validar_actualizacion_registro(self, contacto):
-        if funcionario.get_cedula() in self.get_diccionario_objetos().keys():
+        if contacto.get_numero_telefonico() in self.get_diccionario_objetos().keys():
             if not contacto.get_numero_telefonico() or len(contacto.get_numero_telefonico().strip()) == 0:
                 raise Exception("Debe cargar el numero telefonico!")
             if not contacto.get_numero_telefonico().isdigit():
@@ -248,6 +248,7 @@ class ControladorContacto(ControladorAncestro):
             raise Exception ("No existe empleado con codigo {}".format(codigo))
         else:      
             return self.get_diccionario_objetos()[codigo]
+
 #########################################################################################################
 class FechaControlador():
     """El controlador de fecha valida que la fecha introducida sea la correta"""
@@ -331,6 +332,57 @@ class ControladorUsuario:
             
 #########################################################################################################
 
+class ControladorFicha(ControladorAncestro):
+    """Permite registrar y borrar la ficha """
+    
+    __ficha = None
+    
+    def get_diccionario_objetos(self):
+        #sino existe en diccionario de fichas, creo uno en el root
+        if not self.__ficha:
+            if not hasattr(get_zodb_root(), 'ficha'):
+                get_zodb_root().ficha = BTrees.OOBTree.BTree()
+            self.__ficha = getattr(get_zodb_root(), 'ficha')
+        return self.__ficha
+
+    def get_id_objeto(self, ficha):
+        return contacto.get_codigo()
+    
+    def validar_objeto(self, ficha):
+        if not ficha.get_codigo().isdigit():
+            raise Exception("El codigo debe ser numerico")
+        if not ficha.get_hora_inicio().isdigit():
+            raise Exception("la hora debe ser numerico")
+        if not ficha.get_hora_fin().isdigit():
+            raise Exception("la hora fin debe ser numerico")
+        if not (FechaControlador().validate_date(ficha.get_fecha())):
+            raise Exception("La Fecha ingresada es incorrecta!")    
+       
+    def validar_insercion_registro(self, ficha):
+        if ficha.get_codigo() in self.get_diccionario_objetos().keys():
+            raise Exception("Ya existe una ficha con el mismo codigo {}".format(ficha.get_codigo()))
+
+    def validar_eliminacion_registro(self, ficha):
+        if not ficha.get_codigo() in self.get_diccionario_objetos().keys():
+            raise Exception("No existe una ficha con ese codigo {}".format(ficha.get_codigo()))
+
+    def validar_actualizacion_registro(self, ficha):
+        if ficha.get_codigo() in self.get_diccionario_objetos().keys():
+            if not ficha.get_codigo().isdigit():
+                raise Exception("El codigo debe ser numerico")
+            if not ficha.get_hora_inicio().isdigit():
+                raise Exception("la hora debe ser numerico")
+            if not ficha.get_hora_fin().isdigit():
+                raise Exception("la hora fin debe ser numerico")
+            if not (FechaControlador().validate_date(ficha.get_fecha())):
+                raise Exception("La Fecha ingresada es incorrecta!")   
+    
+    def buscar_codigo(self, codigo):
+        if not codigo in self.get_diccionario_objetos().keys():
+            raise Exception ("No existe un codigo {}".format(codigo))
+        else:      
+            return self.get_diccionario_objetos()[codigo]
+###################################################################################################
 #Pruebas
 if __name__=="__main__":
     print(True)
