@@ -1,0 +1,131 @@
+locale = 'ES'
+spanish = {'menu.principal.titulo': '.::Menu Principal::.',
+           'principal.salir': 'Salir del Sistema',
+           'seleccionar.idioma': 'Seleccione idioma de la aplicacion: ',
+           'ingresar.opcion': 'Ingrese opcion: ',
+           'presionar.enter.continuar': 'Presione Enter para continuar...',
+           'idiomas': 'Idiomas: ',
+           'espanhol': 'Espanhol',
+           'ingles': 'Ingles',
+           'portugues': 'Portugues',
+           'abm.ir.menu.principal': 'Ir a menu principal',
+           'registro.creado': 'Registro creado: ',
+           'abm.salir': 'Salir',
+           #para el abm_biblioteca
+           'abm.biblioteca.menu.titulo': '.:: MENU BIBLIOTECA ::.',
+           'abm.biblioteca.listar': 'Libros Disponibles',
+           'abm.biblioteca.informacion': 'Informacion de la Biblioteca',
+           'abm.biblioteca.nombre': 'Nombre de la Biblioteca: ',
+           'abm.biblioteca.prestar': 'Prestar Libro',
+           'abm.biblioteca.prestar.libro': 'Menu Prestamos',
+           'abm.biblioteca.consultar.alumno': 'Consulta sobre alumno',
+           'abm.biblioteca.consultar': 'Consultar Libro',
+           'abm.biblioteca.registro': 'Registros',
+           #para el abm_docente
+           'abm.registrar.docente': 'Registrar Docentes',
+           'abm.docente': 'Menu de Docentes',
+           'abm.docente.menu.titulo': '.:: MENU DOCENTES ::.',
+           'abm.docente.listar': 'Listar Docentes: ',
+           'abm.docente.titulo.lista': '.::Lista de Docentes::.',
+           'abm.docente.registrar': 'Registrar Docentes: ',
+           'abm.docente.titulo.registrar': '.::Registro de Docentes::.',
+           'docente.ingrese.cedula': 'Ingrese cedula del docente: ',
+           'docente.ingrese.nombre': 'Ingrese nombre del docente: ',
+           'docente.ingrese.apellido': 'Ingrese apellido del docente: ',
+           'docente.ingrese.carrera': 'Ingrese la carrera del docente: ',
+           'docente.ingrese.fecha_nacimiento': 'Ingrese fecha de nacimiento dd/mm/aa: ',
+           'docente.ingrese.telefono': 'Ingrese el nro de telefono: ',
+           'abm.docente.borrar': 'Borrar Docentes: ',
+           'abm.docente.titulo.borrar': '.::Borrar Docentes::.',
+           'docente.cedula.no.existe': 'No existe el docente con cedula nro.: ',
+           'docente.borrado': 'Docentes borrado: ',
+           #para el abm_funcionario
+           'abm.registrar.alumno': 'Registrar Funcionarios',
+           'abm.funcionario': 'Menu de Funcionarios',
+           'abm.funcionario.menu.titulo': '.:: MENU FUNCIONARIOS ::.',
+           'abm.funcionario.listar': 'Listar Funcionarios: ',
+           'abm.funcionario.titulo.lista': '.::Lista de Funcionarios::.',
+           'abm.funcionario.registrar': 'Registrar Funcionarios: ',
+           'abm.funcionario.titulo.registrar': '.::Registro de Funcionarios::.',
+           'funcionario.ingrese.cedula': 'Ingrese cedula del funcionario: ',
+           'funcionario.ingrese.nombre': 'Ingrese nombre del funcionario: ',
+           'funcionario.ingrese.apellido': 'Ingrese apellido del funcionario: ',
+           'funcionario.ingrese.carrera': 'Ingrese la carrera del funcionario: ',
+           'funcionario.ingrese.fecha_nacimiento': 'Ingrese fecha de nacimiento dd/mm/aa: ',
+           'funcionario.ingrese.telefono': 'Ingrese el nro de telefono: ',
+           'abm.funcionario.borrar': 'Borrar Funcionarios: ',
+           'abm.funcionario.titulo.borrar': '.::Borrar Funcionarios::.',
+           'funcionario.cedula.no.existe': 'No existe el funcionario con cedula nro.: ',
+           'funcionario.borrado': 'Funcionarios borrado: ',
+           #para el abm_CONTACTO
+           'abm.contacto.menu.titulo': '.:: MENU CONTACTO ::.',
+           'abm.contacto.titulo.lista': '.::Lista de Contacto::.',
+           'abm.contacto.titulo.registrar': '.::Registro de Contacto::.',
+           'contacto.ingrese.codigo': 'Ingrese codigo del Contacto: ',
+           'contacto.ingrese.nombre': 'Ingrese nombre del Contacto: ',
+           'contacto.ingrese.apellido': 'Ingrese apellido del Contacto: ',
+           'contacto.ingrese.nacionalidad': 'Ingrese nacionalidad del Contacto: ',
+           'abm.contacto.titulo.borrar': '.::Borrar Contacto::.',
+           'contacto.codigo.no.existe': 'No existe contacto con codigo nro: ',
+           'contacto.borrado': 'Contacto Borrado',
+           'abm.contacto.listar': 'Listar Contacto',
+           'abm.contacto.registrar' : 'Registrar Contacto',
+           'abm.contacto.borrar' : 'Borrar Contacto',
+           'abm.contacto.ir.menu.principal':'Volver',
+           #para el abm_libro
+           'abm.libro.menu.titulo': '.:: MENU LIBRO ::.',
+           'abm.libro.titulo.lista': '.:: Lista de Libro ::.',
+           'abm.libro.titulo.registrar': '.:: Registro de Libro ::.',
+           'libro.ingrese.codigo': 'Ingrese codigo del libro: ',
+           'libro.ingrese.nombre': 'Ingrese nombre del libro: ',
+           'libro.ingrese.CONTACTO': 'Ingrese CONTACTO del libro: ',
+           'libro.ingrese.estado': 'Libro Ingrese estado: ',
+           'libro.ingrese.tipo': 'Ingrese tipo del libro (Prestable/Consultable): ',
+           'abm.libro.titulo.borrar': '.::BORRAR LIBRO::.',
+           'libro.codigo.no.existe': 'No Existe libro con codigo nro: ',
+           'libro.borrado': 'Libro Borrado',
+           'abm.libro.listar': 'Listar Libros',
+           'abm.libro.registrar': 'Registrar Libro',
+           'abm.libro.borrar': 'Borrar Libro',
+           'abm.libro.ir.menu.principal':'Volver',
+           #para el abm_ficha
+           'abm.ficha.menu.titulo': '.:: MENU FICHA ::.',
+           'abm.ficha.titulo.lista': '.:: Lista de ficha ::.',
+           'abm.ficha.titulo.registrar': '.:: Registro de Ficha ::.',
+           'ficha.ingrese.codigo': 'Ingrese codigo del ficha: ',
+           'ficha.ingrese.libro': 'Ingrese el codigo del libro: ',
+           'ficha.ingrese.alumno': 'Ingrese el codigo del alumno: ',
+           'abm.ficha.titulo.borrar': '.::BORRAR FICHA::.',
+           'ficha.codigo.no.existe': 'No Existe ficha con codigo nro: ',
+           'ficha.borrado': 'Ficha Borrado',
+           'abm.ficha.listar': 'Listar Ficha',
+           'abm.ficha.registrar': 'Registrar Ficha',
+           'abm.ficha.borrar': 'Borrar Ficha',
+           #para prestar libro
+           'modulo.prestar.libro.menu.titulo':'.::PRESTAMOS DE LIBROS::.',
+           'prestar.libro.prestable' : 'Prestamo Libro',
+           'devolver.libro.prestable' : 'Devolucion Libro',
+           'prestar.libro.consultable' : 'Prestar Libro Consulta',
+           'devolver.libro.consultable' : 'Devolver Libro Consulta',
+           'modulo.prestar.volver' : 'Ir al Menu Principal',
+           
+           #para submenu Registros
+           'abm.biblioteca.registro.titulo': '.::REGISTROS::.',
+           'abm.biblioteca.registro.libro' : 'Menu Libro',
+           'abm.biblioteca.registro.CONTACTO' : 'Menu CONTACTO',
+           'abm.biblioteca.registro.salir' : 'Ir al Menu Principal'
+           }
+
+'''Donde key es por ejemplo 'menu.principal.titulo', y se retorna
+el valor en el idioma correspondiente al de la llave.'''
+def msg(key):
+    try:
+        if locale == 'EN':
+            return english[key]
+        else:
+            return spanish[key]
+    except KeyError as ke:
+        #si la llave no se encuentra en el diccionario,
+        #se retorna de nuevo la llave
+        #raise Exception(ke)
+        return key

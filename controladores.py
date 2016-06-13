@@ -336,7 +336,7 @@ if __name__=="__main__":
     print(True)
     el_controlador = ControladorDocente()
     #cedula, nombre, apellido, fecha_nacimiento, departamento, telefono, asignatura
-    el_docente = Docente('Paradigma', 'INformatica', '25-654521', '512511', 'Morel', 'Cynthia', '18/10/95')
+    el_docente = Docente('Paradigma', 'INformatica', '25-654521', '512511', 'Morel', 'Cynthia<3', '18/10/95')
     el_controlador.crear(el_docente)
 
 
