@@ -5,7 +5,7 @@ import persistent, transaction
 from abc import ABCMeta, abstractmethod
 from contexto import get_zodb_root
 from modelo import Docente,Funcionario,Laboratorio
-from datetime import datetime
+from datetime import datetime, time
 
 #from model import Usuario
 
@@ -149,13 +149,13 @@ class ControladorFuncionario(ControladorAncestro):
         return self.__funcionario
 
     def get_id_objeto(self, funcionario):
-        return funcionario.get_codigo()
+        return funcionario.get_cedula()
     
     def validar_objeto(self, funcionario):
         if not funcionario.get_cedula() or len(funcionario.get_cedula().strip()) == 0:
             raise Exception("Debe cargar cédula del funcionario!")
-        if not funcionario.get_cedula().isdigit():
-            raise Exception("La cedula debe ser numerica")
+        #if not funcionario.get_cedula().isdigit():
+        #    raise Exception("La cedula debe ser numerica")
         if not funcionario.get_nombre():
             raise Exception("Debe ingresar un nombre para el funcionario!")
         if not funcionario.get_apellido():
@@ -170,12 +170,12 @@ class ControladorFuncionario(ControladorAncestro):
             raise Exception("Debe ingresar un departamento para el funcionario!")
 
     def validar_insercion_registro(self, funcionario):
-        if funcionario.get_codigo() in self.get_diccionario_objetos().keys():
-            raise Exception("Ya existe funcionario con Codigo {}".format(funcionario.get_codigo()))
+        if funcionario.get_cedula() in self.get_diccionario_objetos().keys():
+            raise Exception("Ya existe funcionario con Codigo {}".format(funcionario.get_cedula()))
 
     def validar_eliminacion_registro(self, funcionario):
-        if not funcionario.get_codigo() in self.get_diccionario_objetos().keys():
-            raise Exception("No existe docente con Cedula nro {}".format(funcionario.get_codigo()))
+        if not funcionario.get_cedula() in self.get_diccionario_objetos().keys():
+            raise Exception("No existe docente con Cedula nro {}".format(funcionario.get_cedula()))
 
     def validar_actualizacion_registro(self, funcionario):
         if funcionario.get_cedula() in self.get_diccionario_objetos().keys():
@@ -259,12 +259,30 @@ class FechaControlador():
         """
         for format in ['%d/%m/%Y', '%d/%m/%y', '%d/%m/%Y %H:%M:%S', '%d/%m/%y %H:%M:%S']:
             try:
-                result = time.strptime(date, format)
+                result = datetime.strptime(date, format)
                 return True
             except:
                 pass
         return False
+
+#########################################################################################################
+class HoraControlador():
+    """El controlador de hora valida que la fecha introducida sea la correta"""
+    def validate_hora(self,hora):
+        """
+        Funcion para validar una fecha en formato:
+            dd/mm/yyyy, dd/mm/yy, d/m/yy, dd/mm/yyyy hh:mm:ss, dd/mm/yy hh:mm:ss, d/m/yy h:m:s
+        """
+        for format in ['%d/%m/%y %H:%M:%S','%H:%M:%S']:
+            try:
+                result = datetime.strptime(hora, format)
+                return True
+            except:
+                pass
+        return False
+
 #########################################################################################################   	
+
 class ControladorLaboratorio(ControladorAncestro):
     """Controlador que permite la creacion de objetos del tipo laboratorio que cumplan las indicaciones dadas
     tambien permite borrarlos y buscar por codigo dentro del ZODB, un laboratorio no puede ser creado si no existe
@@ -285,13 +303,13 @@ class ControladorLaboratorio(ControladorAncestro):
     def validar_objeto(self, laboratorio):
         if not laboratorio.get_codigo() or len(laboratorio.get_codigo().strip()) == 0:
             raise Exception("Debe ingresar un codigo para el laboratorio!")        
-        if not contacto.get_codigo().isdigit():
+        if not laboratorio.get_codigo().isdigit():
             raise Exception("El codigo debe ser numerico")
         if not laboratorio.get_nombre():
             raise Exception("Debe ingresar un nombre para el laboratorio!")
         if not laboratorio.get_cantidad_maquinas():
             raise Exception("Debe ingresar la cantidad de maquina para el laboratorio!")
-        if not contacto.get_cantidad_maquinas().isdigit():
+        if not laboratorio.get_cantidad_maquinas().isdigit():
             raise Exception("La cantidad de maquinas debe ser numerica")      
             
     def validar_insercion_registro(self, laboratorio):
@@ -302,13 +320,13 @@ class ControladorLaboratorio(ControladorAncestro):
         if laboratorio.get_codigo() in self.get_diccionario_objetos().keys():
             if not laboratorio.get_codigo() or len(laboratorio.get_codigo().strip()) == 0:
                 raise Exception("Debe ingresar un codigo para el laboratorio!")        
-            if not contacto.get_codigo().isdigit():
+            if not laboratorio.get_codigo().isdigit():
                 raise Exception("El codigo debe ser numerico")
             if not laboratorio.get_nombre():
                 raise Exception("Debe ingresar un nombre para el laboratorio!")
             if not laboratorio.get_cantidad_maquinas():
                 raise Exception("Debe ingresar la cantidad de maquina para el laboratorio!")
-            if not contacto.get_cantidad_maquinas().isdigit():
+            if not laboratorio.get_cantidad_maquinas().isdigit():
                 raise Exception("La cantidad de maquinas debe ser numerica")  
 
     def validar_eliminacion_registro(self, laboratorio):
@@ -346,15 +364,15 @@ class ControladorFicha(ControladorAncestro):
         return self.__ficha
 
     def get_id_objeto(self, ficha):
-        return contacto.get_codigo()
+        return ficha.get_codigo()
     
     def validar_objeto(self, ficha):
         if not ficha.get_codigo().isdigit():
             raise Exception("El codigo debe ser numerico")
-        if not ficha.get_hora_inicio().isdigit():
-            raise Exception("la hora debe ser numerico")
-        if not ficha.get_hora_fin().isdigit():
-            raise Exception("la hora fin debe ser numerico")
+        if not (HoraControlador().validate_hora(ficha.get_hora_inicio())):
+            raise Exception("la hora inicial es incorrecta")
+        if not (HoraControlador().validate_hora(ficha.get_hora_fin())):
+            raise Exception("la hora fin es incorrecta")
         if not (FechaControlador().validate_date(ficha.get_fecha())):
             raise Exception("La Fecha ingresada es incorrecta!")    
        
@@ -370,12 +388,12 @@ class ControladorFicha(ControladorAncestro):
         if ficha.get_codigo() in self.get_diccionario_objetos().keys():
             if not ficha.get_codigo().isdigit():
                 raise Exception("El codigo debe ser numerico")
-            if not ficha.get_hora_inicio().isdigit():
-                raise Exception("la hora debe ser numerico")
-            if not ficha.get_hora_fin().isdigit():
-                raise Exception("la hora fin debe ser numerico")
+            if not (HoraControlador().validate_hora(ficha.get_hora_inicio())):
+                raise Exception("la hora inicial es incorrecta")
+            if not (HoraControlador().validate_hora(ficha.get_hora_fin())):
+                raise Exception("la hora fin es incorrecta")
             if not (FechaControlador().validate_date(ficha.get_fecha())):
-                raise Exception("La Fecha ingresada es incorrecta!")   
+                raise Exception("La Fecha ingresada es incorrecta!")  
     
     def buscar_codigo(self, codigo):
         if not codigo in self.get_diccionario_objetos().keys():

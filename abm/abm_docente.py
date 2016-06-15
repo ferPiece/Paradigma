@@ -20,7 +20,7 @@ class ModuloDocente(Modulo):
     def listar(self):
         docentes = self.get_controlador().get_lista_objetos()
         print(msg('abm.docente.titulo.lista'))
-        for doc in docente:
+        for doc in docentes:
             print(doc.__str__())        
         self.pausa()
 
@@ -34,7 +34,7 @@ class ModuloDocente(Modulo):
         fecha_nacimiento = str(util.leer_cadena(msg('docente.ingrese.fecha_nacimiento'), obligatorio))
         asignatura = str(util.leer_cadena(msg('docente.ingrese.asignatura'), obligatorio))
         telefono = str(util.leer_cadena(msg('docente.ingrese.telefono'), obligatorio))
-        departamento = str(util.lee_cadena(msg('docente.ingrese.departamento'), obligatorio))
+        departamento = str(util.leer_cadena(msg('docente.ingrese.departamento'), obligatorio))
         
         docente = Docente(asignatura, departamento, telefono, cedula, nombre, apellido, fecha_nacimiento)
 

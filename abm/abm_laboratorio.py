@@ -20,7 +20,7 @@ class ModuloLaboratorio(Modulo):
     def listar(self):
         laboratorios = self.get_controlador().get_lista_objetos()
         print(msg('abm.laboratorio.titulo.lista'))
-        for lab in laboratorio:
+        for lab in laboratorios:
             print(lab.__str__())        
         self.pausa()
 

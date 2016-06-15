@@ -62,7 +62,7 @@ class Empleado (Persona):
         return self.__telefono
 
     def __str__(self):
-        return "Alumno['%s', '%s', '%s', '%s','%s','%s']" % (self.get_cedula(), self.get_nombre(), self.get_apellido(), self.get_fecha_nacimiento(), self.get_departamento(), self.get_telefono())
+        return "Empleado['%s', '%s', '%s', '%s','%s','%s']" % (self.get_cedula(), self.get_nombre(), self.get_apellido(), self.get_fecha_nacimiento(), self.get_departamento(), self.get_telefono())
 	
 
 class Docente(Empleado):
@@ -87,7 +87,6 @@ class Docente(Empleado):
 
     def set_asignatura(self, asignatura):
         self.__asignatura = asignatura
-
        
     def get_asignatura(self):
         return self.__asignatura
@@ -104,7 +103,7 @@ class Docente(Empleado):
         self._p_changed = True #permite que los datos se guarden como persitentes
 
     def __str__(self):
-        return "Docente['%s', '%s', '%s', '%s','%s','%s']" % (self.get_cedula(), self.get_nombre(), self.get_apellido(), self.get_fecha_nacimiento(), self.get_carrera(), self.get_telefono())
+        return "Docente['%s', '%s', '%s', '%s','%s','%s']" % (self.get_cedula(), self.get_nombre(), self.get_apellido(), self.get_fecha_nacimiento(), self.get_asignatura(), self.get_telefono())
 
 
 class Funcionario(Empleado):
@@ -146,7 +145,7 @@ class Funcionario(Empleado):
         self._p_changed = True #permite que los datos se guarden como persitentes
 
     def __str__(self):
-        return "Funcionario['%s', '%s', '%s', '%s','%s','%s']" % (self.get_cedula(), self.get_nombre(), self.get_apellido(), self.get_fecha_nacimiento(), self.get_carrera(), self.get_telefono())
+        return "Funcionario['%s', '%s', '%s', '%s','%s','%s']" % (self.get_cedula(), self.get_nombre(), self.get_apellido(), self.get_fecha_nacimiento(), self.get_departamento(), self.get_cargo(), self.get_telefono())
 
 
 class Contacto:
@@ -205,24 +204,14 @@ class Laboratorio(Reservable, Consultable,persistent.Persistent):
         self.__fichas = [] #la ficha contiene el horario y fecha del prestamo de un laboratorio - 
 
     #implementar las funciones abstractas
-    def reserva(self, ficha):
-        """
-        Puede ser que reserva reciba una ficha, ya que para la reserva.. calcule que lo mejor seria 
-        crear fichas que tengan el horario y fechas de los prestamos, de manera que si queremos saber 
-        si un laboratorio esta disponible en tal horario podriamos recorrer las fichas consultando horarios
-
-        Ahora dentro de reserva lo que deberia emular es el prestamo en si
-        entonces estoy pensando como hacerlo en mis ratos libres - si ya tenes clara esa parte me avisas!!
-
-        """
+    def reserva(self,ficha):
+        """Reserva el laboratorio."""
+        agregar_ficha(ficha)
         
 
-        pass
-
     def consultar(self):
-        #implementar la consulta de un laboratorio - no se como queres consultar millon forma hay
-
-        pass
+        #Consulta la disponibilidad del laboratorio retornando el listado de fichas
+        return self.__fichas
 
     #Pemite agregar una ficha - equivalente a un prestamo
     def agregar_ficha(self, ficha):
@@ -253,7 +242,7 @@ class Laboratorio(Reservable, Consultable,persistent.Persistent):
         return self.__cantidad_maquinas
 
     def __str__(self):
-        return "Laboratorio['%s', '%s','%s','%s']" % (self.get_codigo(), self.get_nombre(), self.get_autor() ,self.get_tipo())
+        return "Laboratorio['%s', '%s','%s']" % (self.get_codigo(), self.get_nombre(), self.get_cantidad_maquinas())
 
 
 class Ficha:

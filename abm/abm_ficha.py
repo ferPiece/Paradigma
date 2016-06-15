@@ -9,6 +9,8 @@ from contexto import *
 import ZODB
 import BTrees.OOBTree
 import transaction, persistent
+from datetime import datetime, date, time, timedelta
+import calendar
 
 class ModuloFicha(Modulo):
     __controlador = ControladorFicha()
@@ -32,11 +34,11 @@ class ModuloFicha(Modulo):
         hora_inicio = str(util.leer_cadena(msg('ficha.ingrese.hora_inicio'), obligatorio))
         hora_fin = str(util.leer_cadena(msg('ficha.ingrese.hora_fin'), obligatorio))
         fecha = str(util.leer_cadena(msg('ficha.ingrese.fecha'), obligatorio))
-
+        
         ficha = Ficha(codigo, hora_inicio, hora_fin, fecha)
 
+        self.get_controlador().crear(ficha)
         try:
-            self.get_controlador().crear(ficha)
             print(msg("registro.creado"))
         except Exception as e:
             print(e)

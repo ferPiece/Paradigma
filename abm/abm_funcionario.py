@@ -20,7 +20,7 @@ class ModuloFuncionario(Modulo):
     def listar(self):
         funcionarios = self.get_controlador().get_lista_objetos()
         print(msg('abm.funcionario.titulo.lista'))
-        for doc in funcionario:
+        for doc in funcionarios:
             print(doc.__str__())        
         self.pausa()
 
@@ -32,11 +32,11 @@ class ModuloFuncionario(Modulo):
         nombre = str(util.leer_cadena(msg('funcionario.ingrese.nombre'), obligatorio))
         apellido = str(util.leer_cadena(msg('funcionario.ingrese.apellido'), obligatorio))
         fecha_nacimiento = str(util.leer_cadena(msg('funcionario.ingrese.fecha_nacimiento'), obligatorio))
-        asignatura = str(util.leer_cadena(msg('funcionario.ingrese.asignatura'), obligatorio))
+        departamento = str(util.leer_cadena(msg('funcionario.ingrese.departamento'), obligatorio))
+        cargo = str(util.leer_cadena(msg('funcionario.ingrese.cargo'), obligatorio))
         telefono = str(util.leer_cadena(msg('funcionario.ingrese.telefono'), obligatorio))
-        departamento = str(util.lee_cadena(msg('funcionario.ingrese.departamento'), obligatorio))
         
-        funcionario = Funcionario(asignatura, departamento, telefono, cedula, nombre, apellido, fecha_nacimiento)
+        funcionario = Funcionario(cargo, departamento, telefono, cedula, nombre, apellido, fecha_nacimiento)
 
         try:
             self.get_controlador().crear(funcionario)
