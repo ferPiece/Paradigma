@@ -13,6 +13,7 @@ from contexto import *
 import ZODB
 import BTrees.OOBTree
 import transaction, persistent
+import getpass
 
 class ModuloApp(Modulo):
     __controlador = ControladorLaboratorio()
@@ -20,8 +21,23 @@ class ModuloApp(Modulo):
     def __init__(self):
         Modulo.__init__(self, msg('abm.app.menu.titulo'))
         self.__menu_dict = None
-        
+    
+    def login(self):
+        '''Metodo que sirve para loguearse desde la terminal ingresando el usuario y la contraseña.'''
+
+        util.limpiar_pantalla()
+        band = False
+        while band != True:
+            codigo = input("USUARIO: ")
+            password = getpass.getpass("CONTRASEÑA: ")#para ocultar la contraseña que se esta escribiendo
+            if codigo == 'root' and password == 'pass':
+                band = True
+                return band
+            print("ERROR--> USUARIO O PASSWORD!!!!!\n")
+            band = False 
+                
     def crear(self):
+        self.login()
         self.iniciar()
              
     def listar(self):
@@ -50,65 +66,18 @@ class ModuloApp(Modulo):
         
     def abm_laboratorio(self):
         modulo_laboratorio = ModuloLaboratorio()
-        modulo_laboratorio.iniciar()       
-    ''' 
-    def informacion_biblioteca(self):
-        biblioteca = self.get_controlador().get_lista_objetos()[0]
-        print(msg('abm.biblioteca.nombre'), biblioteca.get_institucion(), ', version 0.9.0')
-        print('Autor: Fernando Lopez')
-        self.pausa()
-    
-    def registrar_alumno(self):
-        modulo_alumno = ModuloAlumno()
-        modulo_alumno.iniciar()
-
-    def prestamos(self):
-        modulo_prestamos = ModuloPrestarLibro()
-        modulo_prestamos.iniciar()
-
-    def consultar_libro(self):
-        print('Consulta de Libros')
-        obligatorio = True
+        modulo_laboratorio.iniciar()   
         
-        try:
-            codigo = util.leer_cadena(msg('libro.ingrese.codigo'), obligatorio)
-            libros = self.get_controlador().get_lista_objetos()[0].get_libros()
-            libro = self.get_controlador().buscar_por_codigo(codigo, libros)
-            if libro:
-                print(libro.__str__())
-
-        except Exception as e:
-            print(e)
-        self.pausa()
+    def abm_reservas(self):
+        #modulo_reservas = ModuloReservas()
+        #modulo_reservas.iniciar() 
+        self.salir() 
         
-    def consultar_alumno(self):
-        modulo_alumno = ModuloAlumno()
-        alumno = modulo_alumno.consultar_alumno()
-        if alumno:
-            print('Alumno: ', alumno.get_nombre(), alumno.get_apellido())
-            print(msg('abm.alumno.libros'))
-            for libro in alumno.get_lista_libros():
-                print(libro.__str__())
-
-            if alumno.mostrar_la_multa():
-                print(msg('abm.alumno.multa'), alumno.mostrar_la_multa())
-            else:
-                print(msg('abm.alumno.multa'), 'ninguno')
-
-            if alumno.get_fin_de_multa():
-                print(msg('abm.alumno.fin.multa'), alumno.get_fin_de_multa())
-            else:
-                print(msg('abm.alumno.fin.multa'), 'ninguno')
-        self.pausa()
-        
-    def registro(self):
-        modulo_registro = ModuloRegistro()
-        modulo_registro.iniciar()
-
-    def estadisticas(self):
-        modulo_estadistica = ModuloEstadisticas()
-        modulo_estadistica.iniciar()
-    ''' 
+    def abm_consultas(self):
+        #modulo_consultas = ModuloConsultas()
+        #modulo_consultas.iniciar() 
+        self.salir()              
+              
     def salir(self):
         self.set_terminar_ejecucion(True)
     
@@ -124,10 +93,13 @@ class ModuloApp(Modulo):
             menu_contacto = Menu(msg('abm.contacto'), self.abm_contacto)
             menu_ficha = Menu(msg('abm.ficha'), self.abm_ficha)
             menu_laboratorio = Menu(msg('abm.laboratorio'), self.abm_laboratorio)
+            menu_reservas = Menu(msg('abm.reservas'), self.abm_reservas)
+            menu_consultas = Menu(msg('abm.consultas'), self.abm_consultas)
             menu_salir = Menu(msg('abm.salir'),self.salir)
-            menus = {1: menu_listar, 2: menu_docente, 3: menu_funcionario, 4: menu_contacto, 5: menu_laboratorio, 6: menu_salir}
+            menus = {1: menu_listar, 2: menu_docente, 3: menu_funcionario, 4: menu_contacto, 5: menu_ficha, 6: menu_laboratorio, 7: menu_reservas, 8: menu_consultas, 9: menu_salir}
             self.__menu_dict = menus
         return self.__menu_dict
+        
 
 
 if __name__ == "__main__":

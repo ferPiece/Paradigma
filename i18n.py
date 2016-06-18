@@ -18,6 +18,8 @@ spanish = {'abm.app.menu.titulo': '.::SISTEMA DE RESERVA DE LABORATORIO DE INFOR
            'abm.nombre': 'Nombre del Laboratorio: ',
            'abm.contacto': 'Menu Contacto',
            'abm.laboratorio': 'Menu de laboratorio',
+           'abm.reservas': 'Menu de Reservas',
+           'abm.consultas': 'Menu de Consultas',
            
            #para el abm_docente
            'abm.registrar.docente': 'Registrar Docentes',
@@ -84,6 +86,7 @@ spanish = {'abm.app.menu.titulo': '.::SISTEMA DE RESERVA DE LABORATORIO DE INFOR
            'abm.laboratorio.ir.menu.principal':'Volver',
            #para el abm_ficha
            'abm.ficha.menu.titulo': '.:: MENU FICHA ::.',
+           'abm.ficha': 'Menu de Fichas',
            'abm.ficha.titulo.lista': '.:: Lista de ficha ::.',
            'abm.ficha.titulo.registrar': '.:: Registro de Ficha ::.',
            'ficha.ingrese.codigo': 'Ingrese codigo del ficha: ',
@@ -95,6 +98,7 @@ spanish = {'abm.app.menu.titulo': '.::SISTEMA DE RESERVA DE LABORATORIO DE INFOR
            'abm.ficha.listar': 'Listar Ficha',
            'abm.ficha.registrar': 'Registrar Ficha',
            'abm.ficha.borrar': 'Borrar Ficha',
+           
            #para prestar laboratorio
            'modulo.prestar.laboratorio.menu.titulo':'.::PRESTAMOS DE laboratorioS::.',
            'prestar.laboratorio.prestable' : 'Prestamo laboratorio',
