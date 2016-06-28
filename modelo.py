@@ -242,13 +242,14 @@ class Laboratorio(Reservable, Consultable,persistent.Persistent):
         return self.__cantidad_maquinas
 
     def __str__(self):
-        return "Laboratorio['%s', '%s','%s']" % (self.get_codigo(), self.get_nombre(), self.get_cantidad_maquinas())
+        return "%s" % (self.get_nombre())
 
 
 class Ficha:
     """Clase que contiene los datos basico para un prestamo tales como la hora y fecha"""
-    def __init__ (self, codigo, hora_inicio, hora_fin, fecha):
+    def __init__ (self, codigo, cedula, hora_inicio, hora_fin, fecha):
         self.__codigo = codigo
+        self.__cedula = cedula
         self.__hora_inicio = hora_inicio
         self.__hora_fin = hora_fin
         self.__fecha = fecha
@@ -265,8 +266,14 @@ class Ficha:
     def set_hora_fin(self, hora_fin):
         self.__hora_fin = hora_fin
 
+    def set_cedula(self, cedula):
+        self.__cedula = cedula
+
     def get_codigo (self):
         return self.__codigo
+
+    def get_cedula (self):
+        return self.__cedula
 
     def get_hora_fin(self):
         return self.__hora_fin
@@ -286,28 +293,3 @@ class App:
     if __name__=="__main__":
         #print de pueba 
         print(True)
-
-        #################asignatura, telefono,  cedula,  nombre,   apellido, fecha_nac
-        #docente = Docente('LCIK','0982581092','4490207','Jessica','Matiauda','26/01/1992')
-        #print(alumno.__str__())
-        
-        #cedula, nombre, apellido, fecha_nacimiento, departamento, telefono, asignatura
-        #el_docente = Docente('Paradigma', 'INformatica', '25-654521', '512511', 'Morel', 'Cynthia', '18/10/95')
-        
-        """############### nombre,  apellido, nacionalidad
-        autor = Autor('1','Dimitri', 'Vegas', 'Magleña')
-        print(autor.__str__())
-        
-        #nombre, estado
-        libro = Libro('1','El Libro',autor)
-        print (libro.__str__())
-        
-        la_ficha = Ficha('6','15/11/2011',libro,autor)
-        print(la_ficha.__str__())
-        """
-
-
-        
-
-
-

@@ -3,6 +3,9 @@ sys.path.append("../")  # referencia al directorio base
 import tkinter as tk
 from tkinter import messagebox
 from controladores import ControladorUsuario, ControladorLaboratorio
+from vistas.reservas import FormsReserva
+from vistas.listar_laboratorio import ListarLaboratorio
+
 
 class VistaLogin(tk.PanedWindow):
 
@@ -24,6 +27,7 @@ class VistaLogin(tk.PanedWindow):
         self.pack()
  
     def inicializar(self):
+        #self.__panel_master.config(bg='skyblue')
         self.__panel_master.geometry('300x150')
         self.__panel_master.title("Inicio de Sesión")
         self.get_error_lbl()
@@ -108,6 +112,7 @@ class PanelPrincipal(tk.Frame):
         return self.__controlador
 
     def inicializar(self):
+        #self.__panel_master.config(bg='skyblue')
         self.__panel_master.geometry('800x600')
         self.__panel_master.title("Reserva de Laboratorios")
         menu_bar = tk.Menu(self.__panel_master)
@@ -118,19 +123,35 @@ class PanelPrincipal(tk.Frame):
         informacion_menu.add_command(label="Salir", command=self.salir)
         informacion_menu.add_separator()
         
-        registro_prestamo_menu = tk.Menu(menu_bar)
-        registro_prestamo_menu.add_command(label="Prestamos", command=self.registro_prestamo)
-        registro_prestamo_menu.add_command(label="Consultas", command=self.registro_consulta)
-        registro_prestamo_menu.add_separator()
+        reservas_menu = tk.Menu(menu_bar)
+        reservas_menu.add_command(label="Reservar", command=self.reservar)
+        reservas_menu.add_command(label="Consultas", command=self.consultar)
+        reservas_menu.add_separator()
         
+        listar_laboratorio_menu = tk.Menu(menu_bar)
+        listar_laboratorio_menu.add_command(label='Listar Laboratorios',command=self.listar_laboratorio)
+
+
+
         menu_bar.add_cascade(label="Informacion", menu=informacion_menu)
-        menu_bar.add_cascade(label="Reservas y Consultas",menu=registro_prestamo_menu)
+        menu_bar.add_cascade(label="Reservas y Consultas",menu=reservas_menu)
+        menu_bar.add_cascade(label='Laboratorios', menu=listar_laboratorio_menu)
     
     
-    def registro_prestamo(self):
-        messagebox.showinfo("Info","No implementado")
+
+    '''llamo a la vista de reservas la cual pertirira crear reservas para los laboratorios'''
+    def reservar(self):
+        self.limpiar()
+        form = FormsReserva(self.__panel_master)
+        self.__vista_actual = form
+
+    def listar_laboratorio(self):
+        '''Lista los laboratorios registrados'''
+        self.limpiar()
+        lista = ListarLaboratorio(self.__panel_master)
+        self.__vista_actual = lista
         
-    def registro_consulta(self):
+    def consultar(self):
         messagebox.showinfo("Info","No implementado")
 
     def salir(self):

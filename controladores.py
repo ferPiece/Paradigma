@@ -6,8 +6,8 @@ from abc import ABCMeta, abstractmethod
 from contexto import get_zodb_root
 from modelo import Docente,Funcionario,Laboratorio
 from datetime import datetime, time
-
-#from model import Usuario
+import util
+from model import Usuario
 
 #####################################################################################################
 class ControladorAncestro(metaclass=ABCMeta):
@@ -400,6 +400,15 @@ class ControladorFicha(ControladorAncestro):
             raise Exception ("No existe un codigo {}".format(codigo))
         else:      
             return self.get_diccionario_objetos()[codigo]
+
+    def ultimo_codigo(self):
+        for ficha in self.get_diccionario_objetos().values():
+            cod = util.get_entero(ficha.get_codigo(),'value')
+        if (cod == None):
+            cod = 1
+        else:
+            cod = cod + 1
+        return cod
 ###################################################################################################
 #Pruebas
 if __name__=="__main__":
