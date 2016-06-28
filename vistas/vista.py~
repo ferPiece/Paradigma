@@ -7,7 +7,7 @@ from vistas.reservas import FormsReserva
 from vistas.listar_laboratorio import ListarLaboratorio
 from vistas.forms_docente import FormsDocente
 from vistas.forms_laboratorio import FormsLaboratorio
-from vistas.forms_funcionario import FormsFuncionario
+from vistas.froms_funcionario import FormsFuncionario
 
 class VistaLogin(tk.PanedWindow):
 

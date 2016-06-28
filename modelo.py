@@ -45,7 +45,7 @@ class Empleado (Persona):
     """Clase que hereda las propiedades de una persona, como atributos propios de un empleado"""
     __Metaclass__=ABCMeta
     def __init__(self, departamento, telefono, *args):
-        Persona.__init__ (self,*args)
+        Persona.__init__ (self, *args)
         self.__departamento = departamento
         self.__telefono = telefono
     

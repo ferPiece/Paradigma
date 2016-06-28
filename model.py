@@ -71,3 +71,26 @@ class Menu():
 
     def ejecutar_funcion(self):
         self.__funcion()
+
+########################################################################
+# Solo para operar la vista del sistema
+class Usuario:
+    """Estructura de la persona que opera un sistema, al ser un usuario
+    hereda propiedades de persona fisica"""
+
+    def __init__(self, codigo='<SD>', nombre='<SD>', apellido='<SD>'):
+        self.__codigo = codigo
+        self.__nombre = nombre
+        self.__apellido = apellido
+    
+    def get_nombre(self):
+        return self.__nombre
+
+    def set_nombre(self, nombre):
+        self.__nombre = nombre
+
+    def get_apellido(self):
+        return self.__apellido
+
+    def set_apellido(self, apellido):
+        self.__apellido = apellido
