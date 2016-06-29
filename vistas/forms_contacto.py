@@ -8,8 +8,8 @@ from modelo import Contacto
 class FormsContacto(tk.PanedWindow):
     '''Clase que permite realizar el formulario para introducir un Contacto desde el 
     teclado'''
-    __cedula_etiqueta = None
-    __cedula_entry = None
+    __correo_etiqueta = None
+    __correo_entry = None
     __telefono_etiqueta = None
     __telefono_entry = None
     __guardar_boton = None
@@ -24,8 +24,8 @@ class FormsContacto(tk.PanedWindow):
     def inicializar(self):
         self.__panel_master.geometry('800x600')
         self.__panel_master.title("ABM Contactos")
-        self.get_cedula_etiqueta() 
-        self.get_cedula_entry()   
+        self.get_correo_etiqueta() 
+        self.get_correo_entry()   
         self.get_telefono_etiqueta()
         self.get_telefono_entry()
         self.get_guardar_boton()
@@ -33,20 +33,20 @@ class FormsContacto(tk.PanedWindow):
     def get_controlador(self):
         return self.__controlador
 
-    def get_cedula_etiqueta(self):
+    def get_correo_etiqueta(self):
         '''creo la etiqueta para la vista'''
-        if not self.__cedula_etiqueta:
-            self.__cedula_etiqueta = tk.Label(master=self, text="Cedula: ", width=20)
-            self.__cedula_etiqueta.grid(row=1, column=0)
-        return self.__cedula_etiqueta
+        if not self.__correo_etiqueta:
+            self.__correo_etiqueta = tk.Label(master=self, text="Correo: ", width=20)
+            self.__correo_etiqueta.grid(row=1, column=0)
+        return self.__correo_etiqueta
 
-    def get_cedula_entry(self):
+    def get_correo_entry(self):
         '''creo la caja de texto para cargar datos'''
-        if not self.__cedula_entry:
-            self.__cedula_entry = tk.Entry(master=self, width=20)
-            self.__cedula_entry.focus()
-            self.__cedula_entry.grid(row=1, column=1)
-        return self.__cedula_entry
+        if not self.__correo_entry:
+            self.__correo_entry = tk.Entry(master=self, width=20)
+            self.__correo_entry.focus()
+            self.__correo_entry.grid(row=1, column=1)
+        return self.__correo_entry
 
     def get_telefono_etiqueta(self):
         '''creo la etiqueta para la vista'''
@@ -69,12 +69,12 @@ class FormsContacto(tk.PanedWindow):
         return self.__guardar_boton
 
     def guardar_contacto(self):
-        cedula = self.get_cedula_entry().get()
+        correo = self.get_correo_entry().get()
         telefono = self.get_telefono_entry().get()
         
         try:
             #creo el objeto del tipo contacto
-            contacto = Contacto(correo, telefono)
+            contacto = Contacto(telefono,correo)
             #lo creo por medio del controlador
             self.get_controlador().crear(contacto)
             messagebox.showinfo("Registro contacto","Se creo el contacto con exito")

@@ -1,18 +1,20 @@
 import sys
 sys.path.append("../")  # referencia al directorio base
 import tkinter as tk
-from tkinter import messagebox
+from tkinter import messagebox, PhotoImage
 from controladores import ControladorUsuario, ControladorLaboratorio
 from vistas.reservas import FormsReserva
 from vistas.listar_laboratorio import ListarLaboratorio
 from vistas.forms_docente import FormsDocente
 from vistas.forms_laboratorio import FormsLaboratorio
 from vistas.forms_funcionario import FormsFuncionario
-
+from vistas.forms_contacto import FormsContacto
+from vistas.informacion import Informacion
+from vistas.consultas import FormsConsulta
 class VistaLogin(tk.PanedWindow):
 
     """Vista que es utilizada para loggear el ingreso al sistema"""
-
+    __color_bg = 'pink'
     __error_lbl = None
     __usuario_lbl = None
     __usuario_entry = None 
@@ -23,7 +25,7 @@ class VistaLogin(tk.PanedWindow):
     __listener = None #función que será ejecutada después de ingresar usuario y contrasenha correctamente
     
     def __init__(self, panel_master):
-        tk.PanedWindow.__init__(self, master=panel_master)
+        tk.PanedWindow.__init__(self, master=panel_master, bg = self.__color_bg)
         self.__panel_master = panel_master
         self.inicializar()
         self.pack()
@@ -32,6 +34,7 @@ class VistaLogin(tk.PanedWindow):
         #self.__panel_master.config(bg='skyblue')
         self.__panel_master.geometry('300x150')
         self.__panel_master.title("Inicio de Sesión")
+        self.__panel_master.config(bg = self.__color_bg)
         self.get_error_lbl()
         self.get_usuario_lbl()
         self.get_usuario_entry()
@@ -49,7 +52,7 @@ class VistaLogin(tk.PanedWindow):
     def get_usuario_lbl(self):
         '''crear etiqueta usuario'''
         if not self.__usuario_lbl:
-            self.__usuario_lbl = tk.Label(master=self, text="Usuario: ", font=('Ubuntu', 11), width=10)
+            self.__usuario_lbl = tk.Label(master=self, text="Usuario: ", font=('Ubuntu', 11), width=10, bg = self.__color_bg)
             self.__usuario_lbl.grid(row=1, column=0)
         return self.__usuario_lbl
         
@@ -64,7 +67,7 @@ class VistaLogin(tk.PanedWindow):
     def get_password_lbl(self):
         '''crear etiqueta password'''
         if not self.__password_lbl:
-            self.__password_lbl = tk.Label(master=self, text="Password: ", font=('Ubuntu', 11), width=10)
+            self.__password_lbl = tk.Label(master=self, text="Password: ", font=('Ubuntu', 11), width=10, bg = self.__color_bg)
             self.__password_lbl.grid(row=2, column=0)
         return self.__password_lbl
         
@@ -119,9 +122,9 @@ class PanelPrincipal(tk.Frame):
         self.__panel_master.title("Reserva de Laboratorios")
         menu_bar = tk.Menu(self.__panel_master)
         self.__panel_master.config(menu=menu_bar)
-        
+
         informacion_menu = tk.Menu(menu_bar)
-        informacion_menu.add_command(label="Información", command=self.accion)
+        informacion_menu.add_command(label="Información", command=self.informacion)
         informacion_menu.add_command(label="Salir", command=self.salir)
         informacion_menu.add_separator()
         
@@ -141,6 +144,7 @@ class PanelPrincipal(tk.Frame):
         
         funcionario_menu = tk.Menu(menu_bar)
         funcionario_menu.add_command(label='Registrar Funcionario',command=self.crear_funcionario)
+        funcionario_menu.add_command(label='Registrar Contacto',command=self.crear_contacto)
         
         menu_bar.add_cascade(label="Informacion", menu=informacion_menu)
         menu_bar.add_cascade(label="Reservas y Consultas",menu=reservas_menu)
@@ -180,9 +184,22 @@ class PanelPrincipal(tk.Frame):
         self.limpiar()
         form = FormsFuncionario(self.__panel_master)
         self.__vista_actual = form
+
+    def crear_contacto(self):
+        '''Permite el registro de contactos tanto para funcionarios y docentes'''
+        self.limpiar()
+        form = FormsContacto(self.__panel_master)
+        self.__vista_actual = form
     
     def consultar(self):
-        messagebox.showinfo("Info","No implementado")
+        self.limpiar()
+        form = FormsConsulta(self.__panel_master)
+        self.__vista_actual = form
+
+    def informacion(self):
+        self.limpiar()
+        form = Informacion(self.__panel_master)
+        self.__vista_actual = form
 
     def salir(self):
         self.quit()
@@ -193,7 +210,5 @@ class PanelPrincipal(tk.Frame):
                 
     def accion(self):
         messagebox.showinfo("Info", "No implementado")
-
-
 
 

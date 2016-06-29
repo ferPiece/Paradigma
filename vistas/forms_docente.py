@@ -32,7 +32,7 @@ class FormsDocente(tk.PanedWindow):
         self.pack()
 
     def inicializar(self):
-        self.__panel_master.geometry('600x400')
+        self.__panel_master.geometry('800x600')
         self.__panel_master.title("ABM DOcentes")
         self.get_cedula_etiqueta() 
         self.get_cedula_entry()   
@@ -157,6 +157,7 @@ class FormsDocente(tk.PanedWindow):
             self.__guardar_boton = tk.Button(master=self, text="Guardar", command=self.guardar_docente)
             self.__guardar_boton.grid(row=8, column=1)
         return self.__guardar_boton
+        
 
     def guardar_docente(self):
         cedula = self.get_cedula_entry().get()
